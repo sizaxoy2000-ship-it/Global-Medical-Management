@@ -3,151 +3,166 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Siroz Elite Care | Global</title>
+    <title>Siroz Elite Care</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        :root { --primary: #0a2342; --accent: #c5a059; --bg: #f8f9fa; }
+        :root { --primary: #0a2342; --accent: #c5a059; --bg: #f8f9fa; --danger: #e74c3c; }
         html, body { overflow-x: hidden; width: 100%; margin: 0; padding: 0; background: var(--bg); font-family: 'Cairo', sans-serif; }
-        * { box-sizing: border-box; }
-        .container { width: 100%; padding: 10px; display: flex; flex-direction: column; gap: 12px; }
-        .card { background: #fff; border-radius: 20px; padding: 18px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); width: 100%; position: relative; }
-        .logo { font-size: 1.5rem; text-align: center; margin: 5px 0; color: var(--primary); font-weight: bold; }
-        .logo span { color: var(--accent); }
-        .subtitle { text-align: center; font-size: 0.7rem; color: #999; margin-bottom: 12px; }
-        .grid-depts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; }
-        .dept-card { background: #fdfdfd; padding: 10px 5px; border-radius: 12px; text-align: center; border: 1px solid #eee; font-size: 0.75rem; font-weight: bold; cursor: pointer; }
-        .dept-card.active { background: var(--primary); color: var(--accent); border-color: var(--primary); }
-        input, textarea { width: 100%; padding: 12px; margin: 5px 0; border-radius: 10px; border: 1px solid #eee; text-align: center; font-size: 0.9rem; outline: none; font-family: 'Cairo'; }
-        textarea { height: 60px; resize: none; }
-        .btn { width: 100%; padding: 14px; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; font-size: 0.9rem; transition: 0.3s; }
-        .btn-main { background: var(--primary); color: white; margin-top: 8px; }
-        .table-area { width: 100%; overflow-x: auto; margin-top: 5px; border-radius: 10px; border: 1px solid #f0f0f0; }
-        table { width: 100%; border-collapse: collapse; min-width: 500px; }
-        th { background: #f8f8f8; padding: 8px; font-size: 0.65rem; color: #aaa; text-align: right; }
-        td { padding: 10px 8px; border-bottom: 1px solid #f9f9f9; font-size: 0.8rem; }
-        .setup-screen { max-width: 400px; margin: 40px auto; display: none; }
-        .search-box { background: #f0f4f8; border: 1px solid var(--accent); margin-bottom: 10px; font-weight: bold; }
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        .container { width: 100%; padding: 15px; display: flex; flex-direction: column; gap: 12px; }
+        .card { background: #fff; border-radius: 25px; padding: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.03); width: 100%; text-align: center; position: relative; }
+        .lang-btn { position: absolute; top: 20px; left: 20px; background: var(--primary); color: var(--accent); border: none; padding: 5px 10px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 0.7rem; z-index: 10; }
+        .logo-elite { font-size: 1.8rem; font-weight: bold; color: var(--primary); margin: 10px 0 5px; }
+        .logo-elite span { color: var(--accent); }
+        .tagline { color: #ccc; font-size: 0.75rem; margin-bottom: 20px; }
+        .grid-depts { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+        .dept-card { background: #fff; padding: 12px 5px; border-radius: 15px; border: 1px solid #eee; font-size: 0.8rem; font-weight: bold; color: var(--primary); cursor: pointer; transition: 0.2s; }
+        .dept-card.active { background: var(--primary); color: var(--accent); border-color: var(--primary); transform: scale(0.95); }
+        .full-width-dept { grid-column: span 2; background: var(--primary); color: #fff; }
+        input, textarea { width: 100%; padding: 15px; margin: 8px 0; border-radius: 15px; border: 1px solid #eee; text-align: center; font-size: 0.95rem; outline: none; background: #fff; font-family: 'Cairo'; }
+        .btn-gold { width: 100%; padding: 18px; border: none; border-radius: 15px; background: var(--accent); color: var(--primary); font-weight: bold; font-size: 1.1rem; cursor: pointer; margin-top: 10px; }
+        .admin-card { margin-top: 10px; text-align: right; }
+        .dept-title-label { color: var(--accent); font-weight: bold; font-size: 0.85rem; margin-bottom: 10px; display: block; }
+        table { width: 100%; border-collapse: collapse; margin-top: 5px; }
+        td { padding: 12px 5px; border-bottom: 1px solid #f9f9f9; font-size: 0.8rem; }
+        .action-btns { display: flex; gap: 8px; justify-content: flex-end; }
+        .action-btns button { border: none; background: none; cursor: pointer; font-size: 1rem; }
+        .footer-btns { display: flex; gap: 10px; margin-top: 15px; }
+        .gs-btn { background: #2ecc71; color: white; padding: 12px; border-radius: 12px; border: none; flex: 4; font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 8px; }
+        .settings-btn { background: #eee; color: var(--primary); padding: 12px; border-radius: 12px; border: none; flex: 1; font-size: 1.2rem; cursor: pointer; }
+        .reset-btn { width: 100%; padding: 12px; border: 1px solid var(--danger); border-radius: 15px; background: transparent; color: var(--danger); font-weight: bold; margin-top: 20px; cursor: pointer; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <div id="setupPage" class="card setup-screen">
-        <h1 class="logo">SIROZ <span>ELITE</span></h1>
-        <p class="subtitle">قم بربط عيادتك لتبدأ العمل</p>
+    <div id="setupPage" class="card" style="display: none;">
+        <button class="lang-btn" onclick="toggleLang()" id="langBtn1">EN</button>
+        <div class="logo-elite">SIROZ <span>ELITE</span></div>
+        <div class="tagline" id="t1">نظام إدارة العيادات</div>
         <input type="text" id="clinicName" placeholder="اسم العيادة">
         <input type="tel" id="clinicWa" placeholder="رقم واتساب العيادة">
-        <input type="text" id="scriptUrl" placeholder="رابط Google Script الخاص بك">
-        <button class="btn btn-main" onclick="saveSettings()">بدء النظام الآمن</button>
+        <input type="text" id="scriptUrl" placeholder="رابط Google Script">
+        <button class="btn-gold" style="background:var(--primary); color:#fff;" onclick="saveSettings()" id="b1">حفظ البدء</button>
+        <button id="resetBtn" class="reset-btn" onclick="fullReset()" style="display:none;">⚠️ حذف جميع البيانات والإعدادات</button>
     </div>
 
-    <div id="mainSystem" style="display: none;">
+    <div id="mainApp" style="display: none;">
         <div class="card">
-            <h1 class="logo" id="displayClinicName">SIROZ</h1>
-            <p class="subtitle">نظام الحجز الذكي</p>
+            <button class="lang-btn" onclick="toggleLang()" id="langBtn2">EN</button>
+            <h1 id="title" class="logo-elite" style="margin-top:20px;">سيا</h1>
+            <p id="t2" style="color: #bbb; font-size: 0.8rem; margin-bottom: 15px;">حجز جديد</p>
             <div class="grid-depts">
-                <div class="dept-card" onclick="selectDept('تجميل', this)">✨ تجميل</div>
-                <div class="dept-card" onclick="selectDept('أسنان', this)">🦷 أسنان</div>
-                <div class="dept-card" onclick="selectDept('زراعة الشعر', this)">🌱 زراعة شعر</div>
-                <div class="dept-card" onclick="selectDept('صيدلية', this)">💊 صيدلية</div>
-                <div class="dept-card" onclick="selectDept('مختبر', this)" style="grid-column: span 2;">🔬 مختبر</div>
+                <div class="dept-card" onclick="selectDept('تجميل', this)"><span id="d1">✨ تجميل</span></div>
+                <div class="dept-card" onclick="selectDept('أسنان', this)"><span id="d2">🦷 أسنان</span></div>
+                <div class="dept-card" onclick="selectDept('صيدلية', this)"><span id="d3">💊 صيدلية</span></div>
+                <div class="dept-card" onclick="selectDept('زراعة شعر', this)"><span id="d4">🌱 زراعة شعر</span></div>
+                <div class="dept-card full-width-dept" onclick="selectDept('مختبر', this)"><span id="d5">🔬 مختبر</span></div>
             </div>
             <input type="text" id="pName" placeholder="اسم المراجع">
             <input type="tel" id="pPhone" placeholder="رقم الهاتف">
-            <textarea id="pDesc" placeholder="وصف الحالة"></textarea>
-            <button class="btn btn-main" onclick="confirmBooking()" style="background: var(--accent); color: var(--primary);">تأكيد وحفظ</button>
+            <textarea id="pDesc" placeholder="وصف الحالة / ملاحظات"></textarea>
+            <button class="btn-gold" onclick="confirmBooking()" id="b2">تأكيد وحفظ</button>
         </div>
 
-        <div class="card">
-            <h2 style="text-align: right; color: var(--accent); font-size: 0.9rem;">📊 سجل المراجعين</h2>
-            <input type="text" id="searchInput" class="search-box" placeholder="🔍 ابحث بالاسم..." onkeyup="searchPatient()">
-            <div class="table-area">
-                <table>
-                    <thead><tr><th>المراجع</th><th>الهاتف</th><th>الوصف</th><th>التاريخ</th><th>فعل</th></tr></thead>
-                    <tbody id="adminTableBody"></tbody>
-                </table>
+        <div class="card admin-card">
+            <span class="dept-title-label" id="t3">📊 سجل المراجعين: <span id="activeDeptLabel" style="color:var(--primary)">اختر فرعاً</span></span>
+            <table><tbody id="tableBody"></tbody></table>
+            <div class="footer-btns">
+                <button class="gs-btn" onclick="window.open('https://docs.google.com/spreadsheets', '_blank')"><span>📊</span> Google Sheets</button>
+                <button class="settings-btn" onclick="openSettings()">⚙️</button>
             </div>
-            <button class="btn" onclick="resetSystem()" style="margin-top:10px; background:#eee; font-size:0.7rem;">⚙️ إعدادات الحساب</button>
         </div>
     </div>
 </div>
 
 <script>
-    let currentDept = "";
-
-    window.onload = function() {
-        if(localStorage.getItem('siroz_link')) {
-            document.getElementById('mainSystem').style.display = 'block';
-            document.getElementById('displayClinicName').innerText = localStorage.getItem('siroz_clinic');
-            loadAdminData();
-        } else {
-            document.getElementById('setupPage').style.display = 'block';
-        }
+    let currentDept = ""; let isEn = false;
+    const langData = {
+        ar: { t1: "نظام إدارة العيادات", b1: "حفظ البدء", t2: "حجز جديد", b2: "تأكيد وحفظ", t3: "📊 سجل المراجعين: ", p1: "اسم المراجع", p2: "رقم الهاتف", p3: "وصف الحالة", d1: "✨ تجميل", d2: "🦷 أسنان", d3: "💊 صيدلية", d4: "🌱 زراعة شعر", d5: "🔬 مختبر" },
+        en: { t1: "Clinic Management System", b1: "Save & Start", t2: "New Booking", b2: "Confirm & Save", t3: "📊 Patients Records: ", p1: "Patient Name", p2: "Phone Number", p3: "Description", d1: "✨ Beauty", d2: "🦷 Dental", d3: "💊 Pharmacy", d4: "🌱 Hair", d5: "🔬 Lab" }
     };
 
+    window.onload = function() {
+        if(localStorage.getItem('siroz_active')) {
+            document.getElementById('mainApp').style.display = 'block';
+            document.getElementById('title').innerText = localStorage.getItem('c_name');
+            document.getElementById('clinicName').value = localStorage.getItem('c_name');
+            document.getElementById('clinicWa').value = localStorage.getItem('c_wa');
+            document.getElementById('scriptUrl').value = localStorage.getItem('c_url');
+            document.getElementById('resetBtn').style.display = 'block';
+        } else { document.getElementById('setupPage').style.display = 'block'; }
+    };
+
+    function openSettings() { document.getElementById('mainApp').style.display = 'none'; document.getElementById('setupPage').style.display = 'block'; }
+    function fullReset() { if(confirm("حذف كل شيء والبدء من جديد؟")) { localStorage.clear(); location.reload(); } }
+
+    function toggleLang() {
+        isEn = !isEn; const l = isEn ? langData.en : langData.ar;
+        document.getElementById('htmlTag').dir = isEn ? "ltr" : "rtl";
+        document.getElementById('langBtn1').innerText = isEn ? "AR" : "EN";
+        document.getElementById('langBtn2').innerText = isEn ? "AR" : "EN";
+        for (let key in l) { if(document.getElementById(key)) document.getElementById(key).innerText = l[key]; }
+        document.getElementById('pName').placeholder = l.p1; document.getElementById('pPhone').placeholder = l.p2; document.getElementById('pDesc').placeholder = l.p3;
+    }
+
     function saveSettings() {
-        const name = document.getElementById('clinicName').value;
-        const wa = document.getElementById('clinicWa').value;
-        const link = document.getElementById('scriptUrl').value;
-        if(name && wa && link) {
-            localStorage.setItem('siroz_clinic', name);
-            localStorage.setItem('siroz_wa', wa);
-            localStorage.setItem('siroz_link', link);
+        const name = document.getElementById('clinicName').value; const wa = document.getElementById('clinicWa').value; const url = document.getElementById('scriptUrl').value;
+        if(name && wa && url) {
+            localStorage.setItem('c_name', name); localStorage.setItem('c_wa', wa); localStorage.setItem('c_url', url); localStorage.setItem('siroz_active', 'true');
             location.reload();
-        } else { alert("يرجى ملء جميع الخانات"); }
+        }
     }
 
     function selectDept(dept, el) {
         currentDept = dept;
         document.querySelectorAll('.dept-card').forEach(d => d.classList.remove('active'));
         el.classList.add('active');
+        document.getElementById('activeDeptLabel').innerText = dept;
+        loadRecords();
     }
 
-    async function confirmBooking() {
-        const name = document.getElementById('pName').value;
-        const phone = document.getElementById('pPhone').value;
-        const desc = document.getElementById('pDesc').value || "-";
-        const link = localStorage.getItem('siroz_link');
-        const wa = localStorage.getItem('siroz_wa');
-
-        if(!name || !currentDept || !phone) return alert("اكمل البيانات");
-
-        const date = new Date().toLocaleString('ar-EG');
-        let rs = JSON.parse(localStorage.getItem('siroz_records') || '[]');
-        rs.push({ id: Date.now(), name, phone, desc, dept: currentDept, date });
-        localStorage.setItem('siroz_records', JSON.stringify(rs));
-
-        // الإرسال للجدول الخاص بهذا المستخدم
-        fetch(link, { method: 'POST', mode: 'no-cors', body: JSON.stringify({ name, dept: currentDept, phone, desc, date }) });
-
-        // رسالة الواتساب
-        const msg = `*حجز جديد*%0A👤 الاسم: ${name}%0A🏥 القسم: ${currentDept}%0A📞 الهاتف: ${phone}%0A📅 التاريخ: ${date}`;
-        window.open(`https://api.whatsapp.com/send?phone=${wa}&text=${msg}`, '_blank');
+    function confirmBooking() {
+        const name = document.getElementById('pName').value; const phone = document.getElementById('pPhone').value; const desc = document.getElementById('pDesc').value || "-";
+        if(!name || !phone || !currentDept) return alert("اكمل البيانات واختاري الفرع");
+        const now = new Date(); const fullDate = `${now.toLocaleDateString('ar-EG')} | ${now.toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit' })}`;
+        const record = { id: Date.now(), name, phone, desc, dept: currentDept, date: fullDate };
         
-        loadAdminData();
+        // حفظ في جدول الفرع المحدد فقط
+        let branchKey = 'siroz_rec_' + currentDept;
+        let branchRecords = JSON.parse(localStorage.getItem(branchKey) || '[]');
+        branchRecords.push(record);
+        localStorage.setItem(branchKey, JSON.stringify(branchRecords));
+
+        fetch(localStorage.getItem('c_url'), { method: 'POST', mode: 'no-cors', body: JSON.stringify(record) });
+        const msg = `*حجز جديد*%0A👤 الاسم: ${name}%0A🏥 القسم: ${currentDept}%0A📝 الوصف: ${desc}%0A📅 التاريخ: ${fullDate}`;
+        window.open(`https://api.whatsapp.com/send?phone=${localStorage.getItem('c_wa')}&text=${msg}`, '_blank');
+        
+        loadRecords();
+        document.getElementById('pName').value = ""; document.getElementById('pPhone').value = ""; document.getElementById('pDesc').value = "";
     }
 
-    function loadAdminData() {
-        const rs = JSON.parse(localStorage.getItem('siroz_records') || '[]');
-        const b = document.getElementById('adminTableBody');
-        b.innerHTML = rs.slice().reverse().map(r => `<tr><td><b>${r.name}</b></td><td>${r.phone}</td><td><small>${r.desc}</small></td><td>${r.date}</td><td><button onclick="editRecord(${r.id})" style="border:none;background:none;">✏️</button></td></tr>`).join('') || "<tr><td colspan='5'>لا يوجد بيانات</td></tr>";
+    function loadRecords() {
+        if(!currentDept) return;
+        let branchKey = 'siroz_rec_' + currentDept;
+        const filtered = JSON.parse(localStorage.getItem(branchKey) || '[]');
+        document.getElementById('tableBody').innerHTML = filtered.slice().reverse().map(r => `
+            <tr>
+                <td style="text-align:right"><b>${r.name}</b><br><small style="color:#aaa">${r.date}</small></td>
+                <td style="font-size:0.75rem"><b>${r.phone}</b><br>${r.desc}</td>
+                <td class="action-btns"><button onclick="editRec(${r.id})">✏️</button><button onclick="delRec(${r.id})">🗑️</button></td>
+            </tr>
+        `).join('') || `<tr><td colspan='3' style='text-align:center; color:#ccc; padding:20px;'>سجل ${currentDept} فارغ</td></tr>`;
     }
 
-    function searchPatient() {
-        let input = document.getElementById('searchInput').value.toLowerCase();
-        let rows = document.getElementById('adminTableBody').getElementsByTagName('tr');
-        for (let i = 0; i < rows.length; i++) { rows[i].style.display = rows[i].innerText.toLowerCase().includes(input) ? "" : "none"; }
+    function editRec(id) {
+        let branchKey = 'siroz_rec_' + currentDept;
+        let all = JSON.parse(localStorage.getItem(branchKey) || '[]');
+        let i = all.findIndex(r => r.id === id);
+        let nName = prompt("تعديل الاسم:", all[i].name);
+        if(nName) { all[i].name = nName; localStorage.setItem(branchKey, JSON.stringify(all)); loadRecords(); }
     }
-
-    function editRecord(id) {
-        let rs = JSON.parse(localStorage.getItem('siroz_records') || '[]');
-        let i = rs.findIndex(r => r.id === id);
-        let n = prompt("تعديل الاسم:", rs[i].name);
-        if(n) { rs[i].name = n; localStorage.setItem('siroz_records', JSON.stringify(rs)); loadAdminData(); }
-    }
-
-    function resetSystem() { if(confirm("هل تريد مسح الإعدادات وربط رابط جديد؟")) { localStorage.removeItem('siroz_link'); location.reload(); } }
+    function delRec(id) { if(confirm("حذف؟")) { let branchKey = 'siroz_rec_' + currentDept; let all = JSON.parse(localStorage.getItem(branchKey) || '[]').filter(r => r.id !== id); localStorage.setItem(branchKey, JSON.stringify(all)); loadRecords(); } }
 </script>
 </body>
-    </html>
-    
+                                                                                                            </html>
